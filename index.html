@@ -1,212 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Spin & Win</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التسجيل في العمرة</title>
 
 <style>
 body{
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#141e30,#243b55);
-  text-align:center;
-  color:#fff;
-  overflow:hidden;
+margin:0;
+font-family:Tahoma,Arial;
+background:url("https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1600") center/cover no-repeat;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-/* عنوان */
-h2{
-  margin-top:12px;
+.box{
+background:white;
+width:90%;
+max-width:420px;
+border-radius:25px;
+padding:30px 25px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,0,0,0.25);
 }
 
-/* عداد فائزين */
+.logo{
+font-size:14px;
+color:#555;
+margin-bottom:10px;
+}
+
+h1{
+color:#1b5e20;
+font-size:24px;
+margin:10px 0 20px 0;
+}
+
+p{
+font-size:17px;
+line-height:1.8;
+color:#333;
+}
+
+.date{
+font-weight:bold;
+font-size:20px;
+margin:15px 0;
+}
+
+.warning{
+color:#c62828;
+font-weight:bold;
+margin:10px 0;
+}
+
 .counter{
-  background:#00c853;
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:13px;
-  margin:8px 0;
+font-size:18px;
+margin:10px 0;
+color:#444;
 }
 
-/* محاولة واحدة */
-.chance{
-  color:#ffeb3b;
-  font-size:13px;
-  margin-bottom:10px;
+button{
+margin-top:20px;
+width:100%;
+padding:18px;
+font-size:18px;
+border:none;
+border-radius:40px;
+background:black;
+color:white;
+cursor:pointer;
 }
 
-canvas{
-  width:92vw;
-  max-width:350px;
-  height:92vw;
-  max-height:350px;
+button:hover{
+opacity:0.9;
 }
 
-/* زر */
-.spinBtn{
-  margin-top:18px;
-  padding:14px 36px;
-  font-size:18px;
-  font-weight:bold;
-  background:#00e676;
-  color:#000;
-  border:none;
-  border-radius:12px;
-  box-shadow:0 0 15px #00e676;
-}
-
-/* شاشة الفوز */
-.claim{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.93);
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
-.claim h1{
-  color:#00ff99;
-  font-size:26px;
-}
-
-.claim a{
-  margin-top:25px;
-  background:#00ff99;
-  color:#000;
-  padding:18px 40px;
-  font-size:22px;
-  font-weight:bold;
-  border-radius:15px;
-  text-decoration:none;
-  animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.1)}
-  100%{transform:scale(1)}
-}
-
-/* Toast */
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#000;
-  padding:8px 18px;
-  border-radius:10px;
-  font-size:12px;
-  display:none;
+.footer{
+margin-top:15px;
+font-size:13px;
+color:#777;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<h2>🎁 Spin & Win Big Rewards</h2>
+<div class="box">
 
-<div class="counter" id="counter">112 people won today</div>
-<div class="chance">⚡ Only 1 try left!</div>
-
-<canvas id="wheel" width="350" height="350"></canvas>
-<br>
-<button class="spinBtn" onclick="spin()">SPIN NOW</button>
-
-<div class="claim" id="claimBox">
-  <h1>🎉 Congratulations!</h1>
-  <p>You unlocked a special reward</p>
-  <a href="https://max.bountyads.store/?utm_medium=f00e2c6f9f959bfb01f628e64f8c13122d7ceb87&utm_campaign=target_ZA_9ac614">
-    👉 Claim Now
-  </a>
+<div class="logo">
+الجمهورية الجزائرية الديمقراطية الشعبية<br>
+وزارة الشؤون الدينية والأوقاف
 </div>
 
-<div class="toast" id="toast"></div>
+<h1>الديوان الوطني للحج والعمرة</h1>
 
-<audio id="winSound">
-<source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg">
-</audio>
+<p>
+قرر السيد الرئيس <b>عبد المجيد تبون</b> منح
+<b>350 رحلة عمرة خالصة التكاليف</b> للأراضي المقدسة،
+وذلك بمناسبة حصول الجزائر على جائزة التميز
+عن موسم الحج.
+</p>
+
+<div class="date">
+آخر موعد للتسجيل<br>
+21 / 1 / 2025
+</div>
+
+<div class="warning">
+⚠️ الأماكن محدودة
+</div>
+
+<div class="counter">
+المقاعد المتبقية: <span id="seats">87</span>
+</div>
+
+<p>
+سجل الآن وقم بتأكيد التسجيل عبر الكود
+الذي سيصلك في رسالة نصية.
+</p>
+
+<button onclick="goOffer()">
+تأكيد التسجيل الآن
+</button>
+
+<div class="footer">
+التسجيل مجاني ويستغرق أقل من دقيقة
+</div>
+
+</div>
 
 <script>
-/* ===== عداد وهمي ===== */
-let c = 110 + Math.floor(Math.random()*50);
-const counter=document.getElementById("counter");
 
-setInterval(()=>{
-  c+=Math.floor(Math.random()*2);
-  counter.innerText=c+" people won today";
-},2000);
-
-
-/* ===== Wheel ===== */
-const canvas=document.getElementById("wheel");
-const ctx=canvas.getContext("2d");
-
-const prizes=["Cash","iPhone","Voucher","Bonus","Gift","Jackpot"];
-const colors=["#ff5252","#ff9800","#ffeb3b","#4caf50","#2196f3","#9c27b0"];
-
-const arc=2*Math.PI/prizes.length;
-
-function draw(){
-  for(let i=0;i<prizes.length;i++){
-    ctx.beginPath();
-    ctx.moveTo(175,175);
-    ctx.arc(175,175,170,i*arc,(i+1)*arc);
-    ctx.fillStyle=colors[i];
-    ctx.fill();
-
-    ctx.save();
-    ctx.translate(175,175);
-    ctx.rotate(i*arc+arc/2);
-    ctx.fillStyle="#000";
-    ctx.textAlign="right";
-    ctx.font="13px Arial";
-    ctx.fillText(prizes[i],150,5);
-    ctx.restore();
-  }
-}
-draw();
-
-
-/* ===== Spin ===== */
-let used=false;
-
-function spin(){
-  if(used) return;
-  used=true;
-
-  canvas.style.transition="transform 4s ease-out";
-  canvas.style.transform="rotate(2000deg)";
-
-  setTimeout(()=>{
-    document.getElementById("claimBox").style.display="flex";
-    document.getElementById("winSound").play();
-
-    if(navigator.vibrate) navigator.vibrate(200);
-  },4000);
+function goOffer(){
+window.location.href="https://max.bountyads.store/?utm_medium=b9043e438aaca0461451fdff93a6b518e2c96be6&utm_campaign=target_DZ_4a57b1";
 }
 
+setInterval(function(){
+let seats=document.getElementById("seats");
+let num=parseInt(seats.innerText);
+if(num>12){
+seats.innerText=num-1;
+}
+},8000);
 
-/* ===== Fake Winners ===== */
-const names=["John","Mike","Adam","Sara","Ahmed","Leo"];
-const toast=document.getElementById("toast");
-
-setInterval(()=>{
-  let n=names[Math.floor(Math.random()*names.length)];
-  let p=prizes[Math.floor(Math.random()*prizes.length)];
-
-  toast.innerText=n+" won "+p;
-  toast.style.display="block";
-
-  setTimeout(()=>toast.style.display="none",3000);
-},5000);
 </script>
 
 </body>
