@@ -1,151 +1,161 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>التسجيل في العمرة</title>
+<title>Spin & Win Challenge</title>
 
 <style>
 body{
-margin:0;
-font-family:Tahoma,Arial;
-background:url("https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1600") center/cover no-repeat;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(135deg,#141e30,#243b55);
+  color:#fff;
+  text-align:center;
 }
 
 .box{
-background:white;
-width:90%;
-max-width:420px;
-border-radius:25px;
-padding:30px 25px;
-text-align:center;
-box-shadow:0 0 25px rgba(0,0,0,0.25);
+  max-width:420px;
+  margin:30px auto;
+  padding:20px;
 }
 
-.logo{
-font-size:14px;
-color:#555;
-margin-bottom:10px;
+h1{font-size:22px}
+
+.wheel{
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  border:8px solid #fff;
+  margin:20px auto;
 }
 
-h1{
-color:#1b5e20;
-font-size:24px;
-margin:10px 0 20px 0;
+.btn{
+  padding:14px;
+  width:100%;
+  margin:10px 0;
+  border:none;
+  border-radius:10px;
+  background:#00ffc3;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-p{
-font-size:17px;
-line-height:1.8;
-color:#333;
+#quiz,#result{
+  display:none;
 }
 
-.date{
-font-weight:bold;
-font-size:20px;
-margin:15px 0;
+.progress{
+  height:8px;
+  background:#ffffff30;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0;
 }
 
-.warning{
-color:#c62828;
-font-weight:bold;
-margin:10px 0;
-}
-
-.counter{
-font-size:18px;
-margin:10px 0;
-color:#444;
-}
-
-button{
-margin-top:20px;
-width:100%;
-padding:18px;
-font-size:18px;
-border:none;
-border-radius:40px;
-background:black;
-color:white;
-cursor:pointer;
-}
-
-button:hover{
-opacity:0.9;
-}
-
-.footer{
-margin-top:15px;
-font-size:13px;
-color:#777;
+.bar{
+  height:100%;
+  width:0%;
+  background:#00ffc3;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="box">
 
-<div class="logo">
-الجمهورية الجزائرية الديمقراطية الشعبية<br>
-وزارة الشؤون الدينية والأوقاف
+<!-- SPIN -->
+<div id="spin">
+  <h1>🎁 Spin & Win</h1>
+  <p>You have 1 chance today</p>
+  <div class="wheel" id="wheel"></div>
+  <button class="btn" onclick="spin()">SPIN NOW</button>
 </div>
 
-<h1>الديوان الوطني للحج والعمرة</h1>
+<!-- QUIZ -->
+<div id="quiz">
+  <h1>🔒 Verify Your Reward</h1>
+  <p>Answer 2 quick questions</p>
 
-<p>
-قرر السيد الرئيس <b>عبد المجيد تبون</b> منح
-<b>350 رحلة عمرة خالصة التكاليف</b> للأراضي المقدسة،
-وذلك بمناسبة حصول الجزائر على جائزة التميز
-عن موسم الحج.
-</p>
+  <div class="progress"><div class="bar" id="bar"></div></div>
 
-<div class="date">
-آخر موعد للتسجيل<br>
-21 / 1 / 2025
+  <h2 id="q"></h2>
+  <div id="answers"></div>
 </div>
 
-<div class="warning">
-⚠️ الأماكن محدودة
-</div>
-
-<div class="counter">
-المقاعد المتبقية: <span id="seats">87</span>
-</div>
-
-<p>
-سجل الآن وقم بتأكيد التسجيل عبر الكود
-الذي سيصلك في رسالة نصية.
-</p>
-
-<button onclick="goOffer()">
-تأكيد التسجيل الآن
-</button>
-
-<div class="footer">
-التسجيل مجاني ويستغرق أقل من دقيقة
+<!-- RESULT -->
+<div id="result">
+  <h1>🎉 Congratulations!</h1>
+  <p>You unlocked your reward</p>
+  <button class="btn" onclick="go()">Claim Now</button>
 </div>
 
 </div>
 
 <script>
+const CPA = "https://max.bountyads.store/?utm_medium=8ebfe9ea8ea08199550e9d5cbe70ee55dbafe5f7&utm_campaign=IQ";
 
-function goOffer(){
-window.location.href="https://max.bountyads.store/?utm_medium=b9043e438aaca0461451fdff93a6b518e2c96be6&utm_campaign=target_DZ_4a57b1";
+let spun = false;
+
+function spin(){
+  if(spun) return;
+  spun = true;
+
+  let w = document.getElementById("wheel");
+  w.style.transition="3s";
+  w.style.transform="rotate(1440deg)";
+
+  setTimeout(()=>{
+    alert("Almost! 😳\nAnswer 2 questions to unlock reward");
+    document.getElementById("spin").style.display="none";
+    document.getElementById("quiz").style.display="block";
+    load();
+  },3000);
 }
 
-setInterval(function(){
-let seats=document.getElementById("seats");
-let num=parseInt(seats.innerText);
-if(num>12){
-seats.innerText=num-1;
-}
-},8000);
+let i=0;
 
+let questions=[
+  {q:"Which color is sky?",a:["Blue","Green","Red"]},
+  {q:"2+2=?",a:["3","4","5"]}
+];
+
+function load(){
+  let q=questions[i];
+  document.getElementById("q").innerText=q.q;
+
+  let answers=document.getElementById("answers");
+  answers.innerHTML="";
+
+  document.getElementById("bar").style.width=(i/questions.length*100)+"%";
+
+  q.a.forEach(a=>{
+    let b=document.createElement("button");
+    b.className="btn";
+    b.innerText=a;
+    b.onclick=next;
+    answers.appendChild(b);
+  });
+}
+
+function next(){
+  i++;
+  if(i<questions.length){
+    load();
+  }else{
+    finish();
+  }
+}
+
+function finish(){
+  document.getElementById("quiz").style.display="none";
+  document.getElementById("result").style.display="block";
+}
+
+function go(){
+  window.location.href = CPA;
+}
 </script>
 
 </body>
